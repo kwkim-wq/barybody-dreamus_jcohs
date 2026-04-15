@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>드림어스·JCOHS 주차별 판매 분석</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Apple SD Gothic Neo','Noto Sans KR',sans-serif;background:#f0f2f5;color:#222;}
+  .top-bar{background:#0D3B6E;color:white;padding:20px 32px;display:flex;align-items:center;justify-content:space-between;}
+  .top-bar h1{font-size:20px;font-weight:700;}
+  .top-bar .sub{font-size:13px;opacity:0.75;margin-top:4px;}
+  .badge{background:#1abc9c;border-radius:4px;padding:3px 8px;font-size:12px;}
+  .container{max-width:1400px;margin:0 auto;padding:24px 16px;}
+  .kpi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:28px;}
+  .kpi-card{background:white;border-radius:10px;padding:20px;box-shadow:0 1px 4px rgba(0,0,0,.08);}
+  .kpi-card .label{font-size:12px;color:#888;margin-bottom:6px;}
+  .kpi-card .value{font-size:22px;font-weight:700;color:#0D3B6E;}
+  .kpi-card .sub{font-size:12px;color:#aaa;margin-top:4px;}
+  .channel-block{margin-bottom:40px;}
+  .ch-header{display:flex;align-items:center;gap:10px;padding:14px 18px;background:white;border-radius:10px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.08);}
+  .ch-title{font-size:18px;font-weight:700;color:#0D3B6E;}
+  .ch-badge{color:white;border-radius:4px;padding:3px 10px;font-size:12px;font-weight:600;}
+  .section{background:white;border-radius:10px;padding:24px;box-shadow:0 1px 4px rgba(0,0,0,.08);margin-bottom:16px;}
+  .section-title{font-size:15px;font-weight:700;margin-bottom:16px;color:#0D3B6E;border-left:4px solid #1abc9c;padding-left:10px;}
+  .chart-wrap{position:relative;height:320px;}
+  table{width:100%;border-collapse:collapse;font-size:12px;}
+  th{background:#f5f7fa;padding:8px 10px;text-align:right;font-weight:600;color:#555;border-bottom:2px solid #e0e0e0;white-space:nowrap;}
+  th:first-child{text-align:left;min-width:160px;}
+  td{padding:7px 10px;text-align:right;border-bottom:1px solid #f0f0f0;white-space:nowrap;}
+  td:first-child{text-align:left;}
+  tr:hover td{background:#f9fbfd;}
+  .prod-name{display:flex;align-items:center;gap:6px;font-weight:500;}
+  .dot{display:inline-block;width:9px;height:9px;border-radius:50%;flex-shrink:0;}
+  .sum-row td{background:#f0f4f8;font-weight:700;border-top:2px solid #d0d8e4;}
+  .sum-cell{color:#0D3B6E;}
+  @media(max-width:768px){.kpi-grid{grid-template-columns:repeat(2,1fr);}}
+</style>
+</head>
+<body>
+<div class="top-bar">
+  <div>
+    <h1>드림어스 · JCOHS 주차별 판매 분석</h1>
+    <div class="sub">2026년 2월 1일 ~ 4월 14일</div>
+  </div>
+  <span class="badge">4월은 14일까지</span>
+</div>
+<div class="container">
+
+<div class="kpi-grid">
+  <div class="kpi-card">
+    <div class="label">드림어스 누적 매출</div>
+    <div class="value">26,504,700원</div>
+    <div class="sub">판매 485건</div>
+  </div>
+  <div class="kpi-card">
+    <div class="label">JCOHS 누적 매출</div>
+    <div class="value">43,960,400원</div>
+    <div class="sub">판매 759건</div>
+  </div>
+</div>
+
+
+<div class="channel-block">
+  <div class="ch-header" style="border-left:5px solid #4E91D8;">
+    <span class="ch-title">드림어스</span>
+    <span class="ch-badge" style="background:#4E91D8;">dreamus</span>
+  </div>
+
+  <!-- 매출 선그래프 -->
+  <div class="section">
+    <div class="section-title">제품별 주차별 매출 추이</div>
+    <div class="chart-wrap"><canvas id="dreamus_rev_chart"></canvas></div>
+  </div>
+
+  <!-- 매출 테이블 -->
+  <div class="section">
+    <div class="section-title">제품별 주차별 매출 (원)</div>
+    <div style="overflow-x:auto;">
+    <table>
+      <thead><tr><th>제품</th><th>01/26~02/01</th><th>02/02~02/08</th><th>02/09~02/15</th><th>02/16~02/22</th><th>02/23~03/01</th><th>03/02~03/08</th><th>03/09~03/15</th><th>03/16~03/22</th><th>03/23~03/29</th><th>03/30~04/05</th><th>04/06~04/12</th><th>04/13~04/14</th></tr></thead>
+      <tbody><tr><td class='prod-name'><span class='dot' style='background:#2ED5A3'></span>릴렉스틱롱</td><td>-</td><td>207,000</td><td>207,000</td><td>1,104,000</td><td>483,000</td><td>966,000</td><td>552,000</td><td>552,000</td><td>414,000</td><td>276,000</td><td>276,000</td><td>69,000</td></tr><tr><td class='prod-name'><span class='dot' style='background:#FF6B6B'></span>릴렉스틱볼</td><td>-</td><td>-</td><td>-</td><td>-</td><td>39,900</td><td>319,200</td><td>-</td><td>79,800</td><td>79,800</td><td>-</td><td>239,400</td><td>-</td></tr><tr><td class='prod-name'><span class='dot' style='background:#C77DFF'></span>릴렉스틱숏</td><td>-</td><td>49,000</td><td>-</td><td>392,000</td><td>-</td><td>245,000</td><td>343,000</td><td>98,000</td><td>98,000</td><td>98,000</td><td>98,000</td><td>49,000</td></tr><tr><td class='prod-name'><span class='dot' style='background:#FFD166'></span>릴렉스틱오리지널</td><td>1,180,000</td><td>1,121,000</td><td>531,000</td><td>2,832,000</td><td>1,180,000</td><td>2,006,000</td><td>1,239,000</td><td>1,652,000</td><td>1,180,000</td><td>1,239,000</td><td>1,180,000</td><td>590,000</td></tr><tr><td class='prod-name'><span class='dot' style='background:#06D6A0'></span>슬림벨트v2</td><td>327,000</td><td>218,000</td><td>218,000</td><td>545,000</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td class='prod-name'><span class='dot' style='background:#118AB2'></span>올인원마사지기</td><td>-</td><td>-</td><td>-</td><td>-</td><td>119,700</td><td>39,900</td><td>-</td><td>39,900</td><td>79,800</td><td>39,900</td><td>39,900</td><td>39,900</td></tr><tr><td class='prod-name'><span class='dot' style='background:#EF476F'></span>점핑큐브</td><td>-</td><td>-</td><td>258,000</td><td>129,000</td><td>129,000</td><td>-</td><td>129,000</td><td>-</td><td>129,000</td><td>-</td><td>-</td><td>-</td></tr><tr><td class='prod-name'><span class='dot' style='background:#073B4C'></span>포인트링</td><td>69,300</td><td>19,800</td><td>-</td><td>158,400</td><td>59,400</td><td>39,600</td><td>29,700</td><td>39,600</td><td>49,500</td><td>39,600</td><td>19,800</td><td>19,800</td></tr><tr><td class='prod-name'><span class='dot' style='background:#F4A261'></span>허리보호대</td><td>23,900</td><td>-</td><td>-</td><td>-</td><td>-</td><td>95,600</td><td>23,900</td><td>23,900</td><td>-</td><td>-</td><td>47,800</td><td>-</td></tr><tr class='sum-row'><td>합계</td><td class='sum-cell'>1,600,200</td><td class='sum-cell'>1,614,800</td><td class='sum-cell'>1,214,000</td><td class='sum-cell'>5,160,400</td><td class='sum-cell'>2,011,000</td><td class='sum-cell'>3,711,300</td><td class='sum-cell'>2,316,600</td><td class='sum-cell'>2,485,200</td><td class='sum-cell'>2,030,100</td><td class='sum-cell'>1,692,500</td><td class='sum-cell'>1,900,900</td><td class='sum-cell'>767,700</td></tr></tbody>
+    </table>
+    </div>
+  </div>
+
+  <!-- 건수 선그래프 -->
+  <div class="section">
+    <div class="section-title">제품별 주차별 판매량 추이</div>
+    <div class="chart-wrap"><canvas id="dreamus_cnt_chart"></canvas></div>
+  </div>
+
+  <!-- 건수 테이블 -->
+  <div class="section">
+    <div class="section-title">제품별 주차별 판매량 (건)</div>
+    <div style="overflow-x:auto;">
+    <table>
+      <thead><tr><th>제품</th><th>01/26~02/01</th><th>02/02~02/08</th><th>02/09~02/15</th><th>02/16~02/22</th><th>02/23~03/01</th><th>03/02~03/08</th><th>03/09~03/15</th><th>03/16~03/22</th><th>03/23~03/29</th><th>03/30~04/05</th><th>04/06~04/12</th><th>04/13~04/14</th></tr></thead>
+      <tbody><tr><td class='prod-name'><span class='dot' style='background:#2ED5A3'></span>릴렉스틱롱</td><td>-</td><td>3</td><td>3</td><td>16</td><td>7</td><td>14</td><td>8</td><td>8</td><td>6</td><td>4</td><td>4</td><td>1</td></tr><tr><td class='prod-name'><span class='dot' style='background:#FF6B6B'></span>릴렉스틱볼</td><td>-</td><td>-</td><td>-</td><td>-</td><td>1</td><td>8</td><td>-</td><td>2</td><td>2</td><td>-</td><td>6</td><td>-</td></tr><tr><td class='prod-name'><span class='dot' style='background:#C77DFF'></span>릴렉스틱숏</td><td>-</td><td>1</td><td>-</td><td>8</td><td>-</td><td>5</td><td>7</td><td>2</td><td>2</td><td>2</td><td>2</td><td>1</td></tr><tr><td class='prod-name'><span class='dot' style='background:#FFD166'></span>릴렉스틱오리지널</td><td>20</td><td>19</td><td>9</td><td>48</td><td>20</td><td>34</td><td>21</td><td>28</td><td>20</td><td>21</td><td>20</td><td>10</td></tr><tr><td class='prod-name'><span class='dot' style='background:#06D6A0'></span>슬림벨트v2</td><td>3</td><td>2</td><td>2</td><td>5</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td class='prod-name'><span class='dot' style='background:#118AB2'></span>올인원마사지기</td><td>-</td><td>-</td><td>-</td><td>-</td><td>3</td><td>1</td><td>-</td><td>1</td><td>2</td><td>1</td><td>1</td><td>1</td></tr><tr><td class='prod-name'><span class='dot' style='background:#EF476F'></span>점핑큐브</td><td>-</td><td>-</td><td>2</td><td>1</td><td>1</td><td>-</td><td>1</td><td>-</td><td>1</td><td>-</td><td>-</td><td>-</td></tr><tr><td class='prod-name'><span class='dot' style='background:#073B4C'></span>포인트링</td><td>7</td><td>2</td><td>-</td><td>16</td><td>6</td><td>4</td><td>3</td><td>4</td><td>5</td><td>4</td><td>2</td><td>2</td></tr><tr><td class='prod-name'><span class='dot' style='background:#F4A261'></span>허리보호대</td><td>1</td><td>-</td><td>-</td><td>-</td><td>-</td><td>4</td><td>1</td><td>1</td><td>-</td><td>-</td><td>2</td><td>-</td></tr><tr class='sum-row'><td>합계</td><td class='sum-cell'>31</td><td class='sum-cell'>27</td><td class='sum-cell'>16</td><td class='sum-cell'>94</td><td class='sum-cell'>38</td><td class='sum-cell'>70</td><td class='sum-cell'>41</td><td class='sum-cell'>46</td><td class='sum-cell'>38</td><td class='sum-cell'>32</td><td class='sum-cell'>37</td><td class='sum-cell'>15</td></tr></tbody>
+    </table>
+    </div>
+  </div>
+</div>
+<script>
+new Chart(document.getElementById('dreamus_rev_chart'), {
+  type:'line',
+  data:{ labels:['01/26~02/01', '02/02~02/08', '02/09~02/15', '02/16~02/22', '02/23~03/01', '03/02~03/08', '03/09~03/15', '03/16~03/22', '03/23~03/29', '03/30~04/05', '04/06~04/12', '04/13~04/14'], datasets:[{"label":"릴렉스틱롱","data":[0, 207000, 207000, 1104000, 483000, 966000, 552000, 552000, 414000, 276000, 276000, 69000],"borderColor":"#2ED5A3","backgroundColor":"#2ED5A322","tension":0.3,"fill":false,"pointRadius":4,"hidden":true},{"label":"릴렉스틱볼","data":[0, 0, 0, 0, 39900, 319200, 0, 79800, 79800, 0, 239400, 0],"borderColor":"#FF6B6B","backgroundColor":"#FF6B6B22","tension":0.3,"fill":false,"pointRadius":4,"hidden":true},{"label":"릴렉스틱숏","data":[0, 49000, 0, 392000, 0, 245000, 343000, 98000, 98000, 98000, 98000, 49000],"borderColor":"#C77DFF","backgroundColor":"#C77DFF22","tension":0.3,"fill":false,"pointRadius":4,"hidden":true},{"label":"릴렉스틱오리지널","data":[1180000, 1121000, 531000, 2832000, 1180000, 2006000, 1239000, 1652000, 1180000, 1239000, 1180000, 590000],"borderColor":"#FFD166","backgroundColor":"#FFD16622","tension":0.3,"fill":false,"pointRadius":4,"hidden":true},{"label":"슬림벨트v2","data":[327000, 218000, 218000, 545000, 0, 0, 0, 0, 0, 0, 0, 0],"borderColor":"#06D6A0","backgroundColor":"#06D6A022","tension":0.3,"fill":false,"pointRadius":4,"hidden":true},{"label":"올인원마사지기","data":[0, 0, 0, 0, 119700, 39900, 0, 39900, 79800, 39900, 39900, 39900],"borderColor":"#118AB2","backgroundColor":"#118AB222","tension":0.3,"fill":false,"pointRadius":4,"hidden":true},{"label":"점핑큐브","data":[0, 0, 258000, 129000, 129000, 0, 129000, 0, 129000, 0, 0, 0],"borderColor":"#EF476F","backgroundColor":"#EF476F22","tension":0.3,"fill":false,"pointRadius":4,"hidden":true},{"label":"포인트링","data":[69300, 19800, 0, 158400, 59400, 39600, 29700, 39600, 49500, 39600, 19800, 19800],"borderColor":"#073B4C","backgroundColor":"#073B4C22","tension":0.3,"fill":false,"pointRadius":4,"hidden":true},{"label":"허리보호대","data":[23900, 0, 0, 0, 0, 95600, 23900, 23900, 0, 0, 47800, 0],"borderColor":"#F4A261","backgroundColor":"#F4A26122","tension":0.3,"fill":false,"pointRadius":4,"hidden":true}] },
+  options:{
+    responsive:true, maintainAspectRatio:false,
+    plugins:{ legend:{position:'top'} },
+    scales:{ x:{ticks:{maxRotation:60,font:{size:11}}}, y:{beginAtZero:true, ticks:{callback:v=>v.toLocaleString()+'원'}} }
+  }
+});
+new Chart(document.getElementById('dreamus_cnt_chart'), {
+  type:'line',
+  data:{ labels:['01/26~02/01', '02/02~02/08', '02/09~02/15', '02/16~02/22', '02/23~03/01', '03/02~03/08', '03/09~03/15', '03/16~03/22', '03/23~03/29', '03/30~04/05', '04/06~04/12', '04/13~04/14'], datasets:[{"label":"릴렉스틱롱","data":[0, 3, 3, 16, 7, 14, 8, 8, 6, 4, 4, 1],"borderColor":"#2ED5A3","backgroundColor":"#2ED5A322","tension":0.3,"fill":false,"pointRadius":4,"hidden":true},{"label":"릴렉스틱볼","data":[0, 0, 0, 0, 1, 8, 0, 2, 2, 0, 6, 0],"borderColor":"#FF6B6B","backgroundColor":"#FF6B6B22","tension":0.3,"fill":false,"pointRadius":4,"hidden":true},{"label":"릴렉스틱숏","data":[0, 1, 0, 8, 0, 5, 7, 2, 2, 2, 2, 1],"borderColor":"#C77DFF","backgroundColor":"#C77DFF22","tension":0.3,"fill":false,"pointRadius":4,"hidden":true},{"label":"릴렉스틱오리지널","data":[20, 19, 9, 48, 20, 34, 21, 28, 20, 21, 20, 10],"borderColor":"#FFD166","backgroundColor":"#FFD16622","tension":0.3,"fill":false,"pointRadius":4,"hidden":true},{"label":"슬림벨트v2","data":[3, 2, 2, 5, 0, 0, 0, 0, 0, 0, 0, 0],"borderColor":"#06D6A0","backgroundColor":"#06D6A022","tension":0.3,"fill":false,"pointRadius":4,"hidden":true},{"label":"올인원마사지기","data":[0, 0, 0, 0, 3, 1, 0, 1, 2, 1, 1, 1],"borderColor":"#118AB2","backgroundColor":"#118AB222","tension":0.3,"fill":false,"pointRadius":4,"hidden":true},{"label":"점핑큐브","data":[0, 0, 2, 1, 1, 0, 1, 0, 1, 0, 0, 0],"borderColor":"#EF476F","backgroundColor":"#EF476F22","tension":0.3,"fill":false,"pointRadius":4,"hidden":true},{"label":"포인트링","data":[7, 2, 0, 16, 6, 4, 3, 4, 5, 4, 2, 2],"borderColor":"#073B4C","backgroundColor":"#073B4C22","tension":0.3,"fill":false,"pointRadius":4,"hidden":true},{"label":"허리보호대","data":[1, 0, 0, 0, 0, 4, 1, 1, 0, 0, 2, 0],"borderColor":"#F4A261","backgroundColor":"#F4A26122","tension":0.3,"fill":false,"pointRadius":4,"hidden":true}] },
+  options:{
+    responsive:true, maintainAspectRatio:false,
+    plugins:{ legend:{position:'top'} },
+    scales:{ x:{ticks:{maxRotation:60,font:{size:11}}}, y:{beginAtZero:true, ticks:{callback:v=>v.toLocaleString()+'건'}} }
+  }
+});
+</script>
+
+<div class="channel-block">
+  <div class="ch-header" style="border-left:5px solid #FF8C42;">
+    <span class="ch-title">제이코스</span>
+    <span class="ch-badge" style="background:#FF8C42;">jcohs</span>
+  </div>
+
+  <!-- 매출 선그래프 -->
+  <div class="section">
+    <div class="section-title">제품별 주차별 매출 추이</div>
+    <div class="chart-wrap"><canvas id="jcohs_rev_chart"></canvas></div>
+  </div>
+
+  <!-- 매출 테이블 -->
+  <div class="section">
+    <div class="section-title">제품별 주차별 매출 (원)</div>
+    <div style="overflow-x:auto;">
+    <table>
+      <thead><tr><th>제품</th><th>01/26~02/01</th><th>02/02~02/08</th><th>02/09~02/15</th><th>02/16~02/22</th><th>02/23~03/01</th><th>03/02~03/08</th><th>03/09~03/15</th><th>03/16~03/22</th><th>03/23~03/29</th><th>03/30~04/05</th><th>04/06~04/12</th><th>04/13~04/14</th></tr></thead>
+      <tbody><tr><td class='prod-name'><span class='dot' style='background:#2ED5A3'></span>EMS손목마사지기</td><td>-</td><td>-</td><td>158,000</td><td>395,000</td><td>474,000</td><td>869,000</td><td>237,000</td><td>711,000</td><td>711,000</td><td>711,000</td><td>474,000</td><td>158,000</td></tr><tr><td class='prod-name'><span class='dot' style='background:#FF6B6B'></span>EMS허리마사지기</td><td>-</td><td>-</td><td>-</td><td>278,000</td><td>556,000</td><td>417,000</td><td>417,000</td><td>278,000</td><td>417,000</td><td>-</td><td>278,000</td><td>834,000</td></tr><tr><td class='prod-name'><span class='dot' style='background:#C77DFF'></span>릴렉스틱롱</td><td>-</td><td>649,000</td><td>944,000</td><td>472,000</td><td>708,000</td><td>1,593,000</td><td>1,180,000</td><td>767,000</td><td>1,062,000</td><td>1,239,000</td><td>1,121,000</td><td>354,000</td></tr><tr><td class='prod-name'><span class='dot' style='background:#FFD166'></span>릴렉스틱볼</td><td>-</td><td>151,600</td><td>75,800</td><td>-</td><td>-</td><td>265,300</td><td>113,700</td><td>341,100</td><td>189,500</td><td>75,800</td><td>113,700</td><td>75,800</td></tr><tr><td class='prod-name'><span class='dot' style='background:#06D6A0'></span>릴렉스틱숏</td><td>-</td><td>429,000</td><td>156,000</td><td>117,000</td><td>117,000</td><td>78,000</td><td>156,000</td><td>39,000</td><td>195,000</td><td>156,000</td><td>156,000</td><td>78,000</td></tr><tr><td class='prod-name'><span class='dot' style='background:#118AB2'></span>릴렉스틱오리지널</td><td>-</td><td>1,176,000</td><td>588,000</td><td>1,029,000</td><td>588,000</td><td>2,058,000</td><td>1,764,000</td><td>1,666,000</td><td>833,000</td><td>2,352,000</td><td>784,000</td><td>686,000</td></tr><tr><td class='prod-name'><span class='dot' style='background:#EF476F'></span>릴렉스틱오리지널_루피</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>98,000</td><td>343,000</td><td>314,000</td><td>392,000</td><td>637,000</td><td>784,000</td><td>441,000</td></tr><tr><td class='prod-name'><span class='dot' style='background:#073B4C'></span>슬림벨트v2</td><td>-</td><td>1,071,000</td><td>714,000</td><td>714,000</td><td>238,000</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td class='prod-name'><span class='dot' style='background:#F4A261'></span>슬림벨트v3</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>258,000</td><td>-</td><td>-</td><td>-</td><td>1,290,000</td><td>-</td></tr><tr><td class='prod-name'><span class='dot' style='background:#E76F51'></span>올인원마사지기</td><td>-</td><td>98,700</td><td>65,800</td><td>65,800</td><td>65,800</td><td>361,900</td><td>164,500</td><td>197,400</td><td>98,700</td><td>98,700</td><td>197,400</td><td>98,700</td></tr><tr><td class='prod-name'><span class='dot' style='background:#457B9D'></span>필라테스바</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>39,900</td></tr><tr><td class='prod-name'><span class='dot' style='background:#A8DADC'></span>허리보호대</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>47,800</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr class='sum-row'><td>합계</td><td class='sum-cell'>0</td><td class='sum-cell'>3,575,300</td><td class='sum-cell'>2,701,600</td><td class='sum-cell'>3,070,800</td><td class='sum-cell'>2,746,800</td><td class='sum-cell'>5,740,200</td><td class='sum-cell'>4,681,000</td><td class='sum-cell'>4,313,500</td><td class='sum-cell'>3,898,200</td><td class='sum-cell'>5,269,500</td><td class='sum-cell'>5,198,100</td><td class='sum-cell'>2,765,400</td></tr></tbody>
+    </table>
+    </div>
+  </div>
+
+  <!-- 건수 선그래프 -->
+  <div class="section">
+    <div class="section-title">제품별 주차별 판매량 추이</div>
+    <div class="chart-wrap"><canvas id="jcohs_cnt_chart"></canvas></div>
+  </div>
+
+  <!-- 건수 테이블 -->
+  <div class="section">
+    <div class="section-title">제품별 주차별 판매량 (건)</div>
+    <div style="overflow-x:auto;">
+    <table>
+      <thead><tr><th>제품</th><th>01/26~02/01</th><th>02/02~02/08</th><th>02/09~02/15</th><th>02/16~02/22</th><th>02/23~03/01</th><th>03/02~03/08</th><th>03/09~03/15</th><th>03/16~03/22</th><th>03/23~03/29</th><th>03/30~04/05</th><th>04/06~04/12</th><th>04/13~04/14</th></tr></thead>
+      <tbody><tr><td class='prod-name'><span class='dot' style='background:#2ED5A3'></span>EMS손목마사지기</td><td>-</td><td>-</td><td>2</td><td>5</td><td>6</td><td>11</td><td>3</td><td>9</td><td>9</td><td>9</td><td>6</td><td>2</td></tr><tr><td class='prod-name'><span class='dot' style='background:#FF6B6B'></span>EMS허리마사지기</td><td>-</td><td>-</td><td>-</td><td>2</td><td>4</td><td>3</td><td>3</td><td>2</td><td>3</td><td>-</td><td>2</td><td>6</td></tr><tr><td class='prod-name'><span class='dot' style='background:#C77DFF'></span>릴렉스틱롱</td><td>-</td><td>11</td><td>16</td><td>8</td><td>12</td><td>27</td><td>20</td><td>13</td><td>18</td><td>21</td><td>19</td><td>6</td></tr><tr><td class='prod-name'><span class='dot' style='background:#FFD166'></span>릴렉스틱볼</td><td>-</td><td>4</td><td>2</td><td>-</td><td>-</td><td>7</td><td>3</td><td>9</td><td>5</td><td>2</td><td>3</td><td>2</td></tr><tr><td class='prod-name'><span class='dot' style='background:#06D6A0'></span>릴렉스틱숏</td><td>-</td><td>11</td><td>4</td><td>3</td><td>3</td><td>2</td><td>4</td><td>1</td><td>5</td><td>4</td><td>4</td><td>2</td></tr><tr><td class='prod-name'><span class='dot' style='background:#118AB2'></span>릴렉스틱오리지널</td><td>-</td><td>24</td><td>12</td><td>21</td><td>12</td><td>42</td><td>36</td><td>34</td><td>17</td><td>48</td><td>16</td><td>14</td></tr><tr><td class='prod-name'><span class='dot' style='background:#EF476F'></span>릴렉스틱오리지널_루피</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>2</td><td>7</td><td>6</td><td>8</td><td>13</td><td>16</td><td>9</td></tr><tr><td class='prod-name'><span class='dot' style='background:#073B4C'></span>슬림벨트v2</td><td>-</td><td>9</td><td>6</td><td>6</td><td>2</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td class='prod-name'><span class='dot' style='background:#F4A261'></span>슬림벨트v3</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>2</td><td>-</td><td>-</td><td>-</td><td>10</td><td>-</td></tr><tr><td class='prod-name'><span class='dot' style='background:#E76F51'></span>올인원마사지기</td><td>-</td><td>3</td><td>2</td><td>2</td><td>2</td><td>11</td><td>5</td><td>6</td><td>3</td><td>3</td><td>6</td><td>3</td></tr><tr><td class='prod-name'><span class='dot' style='background:#457B9D'></span>필라테스바</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>1</td></tr><tr><td class='prod-name'><span class='dot' style='background:#A8DADC'></span>허리보호대</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>2</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr class='sum-row'><td>합계</td><td class='sum-cell'>0</td><td class='sum-cell'>62</td><td class='sum-cell'>44</td><td class='sum-cell'>47</td><td class='sum-cell'>41</td><td class='sum-cell'>105</td><td class='sum-cell'>85</td><td class='sum-cell'>80</td><td class='sum-cell'>68</td><td class='sum-cell'>100</td><td class='sum-cell'>82</td><td class='sum-cell'>45</td></tr></tbody>
+    </table>
+    </div>
+  </div>
+</div>
+<script>
+new Chart(document.getElementById('jcohs_rev_chart'), {
+  type:'line',
+  data:{ labels:['01/26~02/01', '02/02~02/08', '02/09~02/15', '02/16~02/22', '02/23~03/01', '03/02~03/08', '03/09~03/15', '03/16~03/22', '03/23~03/29', '03/30~04/05', '04/06~04/12', '04/13~04/14'], datasets:[{"label":"EMS손목마사지기","data":[0, 0, 158000, 395000, 474000, 869000, 237000, 711000, 711000, 711000, 474000, 158000],"borderColor":"#2ED5A3","backgroundColor":"#2ED5A322","tension":0.3,"fill":false,"pointRadius":4,"hidden":true},{"label":"EMS허리마사지기","data":[0, 0, 0, 278000, 556000, 417000, 417000, 278000, 417000, 0, 278000, 834000],"borderColor":"#FF6B6B","backgroundColor":"#FF6B6B22","tension":0.3,"fill":false,"pointRadius":4,"hidden":true},{"label":"릴렉스틱롱","data":[0, 649000, 944000, 472000, 708000, 1593000, 1180000, 767000, 1062000, 1239000, 1121000, 354000],"borderColor":"#C77DFF","backgroundColor":"#C77DFF22","tension":0.3,"fill":false,"pointRadius":4,"hidden":true},{"label":"릴렉스틱볼","data":[0, 151600, 75800, 0, 0, 265300, 113700, 341100, 189500, 75800, 113700, 75800],"borderColor":"#FFD166","backgroundColor":"#FFD16622","tension":0.3,"fill":false,"pointRadius":4,"hidden":true},{"label":"릴렉스틱숏","data":[0, 429000, 156000, 117000, 117000, 78000, 156000, 39000, 195000, 156000, 156000, 78000],"borderColor":"#06D6A0","backgroundColor":"#06D6A022","tension":0.3,"fill":false,"pointRadius":4,"hidden":true},{"label":"릴렉스틱오리지널","data":[0, 1176000, 588000, 1029000, 588000, 2058000, 1764000, 1666000, 833000, 2352000, 784000, 686000],"borderColor":"#118AB2","backgroundColor":"#118AB222","tension":0.3,"fill":false,"pointRadius":4,"hidden":true},{"label":"릴렉스틱오리지널_루피","data":[0, 0, 0, 0, 0, 98000, 343000, 314000, 392000, 637000, 784000, 441000],"borderColor":"#EF476F","backgroundColor":"#EF476F22","tension":0.3,"fill":false,"pointRadius":4,"hidden":true},{"label":"슬림벨트v2","data":[0, 1071000, 714000, 714000, 238000, 0, 0, 0, 0, 0, 0, 0],"borderColor":"#073B4C","backgroundColor":"#073B4C22","tension":0.3,"fill":false,"pointRadius":4,"hidden":true},{"label":"슬림벨트v3","data":[0, 0, 0, 0, 0, 0, 258000, 0, 0, 0, 1290000, 0],"borderColor":"#F4A261","backgroundColor":"#F4A26122","tension":0.3,"fill":false,"pointRadius":4,"hidden":true},{"label":"올인원마사지기","data":[0, 98700, 65800, 65800, 65800, 361900, 164500, 197400, 98700, 98700, 197400, 98700],"borderColor":"#E76F51","backgroundColor":"#E76F5122","tension":0.3,"fill":false,"pointRadius":4,"hidden":true},{"label":"필라테스바","data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 39900],"borderColor":"#457B9D","backgroundColor":"#457B9D22","tension":0.3,"fill":false,"pointRadius":4,"hidden":true},{"label":"허리보호대","data":[0, 0, 0, 0, 0, 0, 47800, 0, 0, 0, 0, 0],"borderColor":"#A8DADC","backgroundColor":"#A8DADC22","tension":0.3,"fill":false,"pointRadius":4,"hidden":true}] },
+  options:{
+    responsive:true, maintainAspectRatio:false,
+    plugins:{ legend:{position:'top'} },
+    scales:{ x:{ticks:{maxRotation:60,font:{size:11}}}, y:{beginAtZero:true, ticks:{callback:v=>v.toLocaleString()+'원'}} }
+  }
+});
+new Chart(document.getElementById('jcohs_cnt_chart'), {
+  type:'line',
+  data:{ labels:['01/26~02/01', '02/02~02/08', '02/09~02/15', '02/16~02/22', '02/23~03/01', '03/02~03/08', '03/09~03/15', '03/16~03/22', '03/23~03/29', '03/30~04/05', '04/06~04/12', '04/13~04/14'], datasets:[{"label":"EMS손목마사지기","data":[0, 0, 2, 5, 6, 11, 3, 9, 9, 9, 6, 2],"borderColor":"#2ED5A3","backgroundColor":"#2ED5A322","tension":0.3,"fill":false,"pointRadius":4,"hidden":true},{"label":"EMS허리마사지기","data":[0, 0, 0, 2, 4, 3, 3, 2, 3, 0, 2, 6],"borderColor":"#FF6B6B","backgroundColor":"#FF6B6B22","tension":0.3,"fill":false,"pointRadius":4,"hidden":true},{"label":"릴렉스틱롱","data":[0, 11, 16, 8, 12, 27, 20, 13, 18, 21, 19, 6],"borderColor":"#C77DFF","backgroundColor":"#C77DFF22","tension":0.3,"fill":false,"pointRadius":4,"hidden":true},{"label":"릴렉스틱볼","data":[0, 4, 2, 0, 0, 7, 3, 9, 5, 2, 3, 2],"borderColor":"#FFD166","backgroundColor":"#FFD16622","tension":0.3,"fill":false,"pointRadius":4,"hidden":true},{"label":"릴렉스틱숏","data":[0, 11, 4, 3, 3, 2, 4, 1, 5, 4, 4, 2],"borderColor":"#06D6A0","backgroundColor":"#06D6A022","tension":0.3,"fill":false,"pointRadius":4,"hidden":true},{"label":"릴렉스틱오리지널","data":[0, 24, 12, 21, 12, 42, 36, 34, 17, 48, 16, 14],"borderColor":"#118AB2","backgroundColor":"#118AB222","tension":0.3,"fill":false,"pointRadius":4,"hidden":true},{"label":"릴렉스틱오리지널_루피","data":[0, 0, 0, 0, 0, 2, 7, 6, 8, 13, 16, 9],"borderColor":"#EF476F","backgroundColor":"#EF476F22","tension":0.3,"fill":false,"pointRadius":4,"hidden":true},{"label":"슬림벨트v2","data":[0, 9, 6, 6, 2, 0, 0, 0, 0, 0, 0, 0],"borderColor":"#073B4C","backgroundColor":"#073B4C22","tension":0.3,"fill":false,"pointRadius":4,"hidden":true},{"label":"슬림벨트v3","data":[0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 10, 0],"borderColor":"#F4A261","backgroundColor":"#F4A26122","tension":0.3,"fill":false,"pointRadius":4,"hidden":true},{"label":"올인원마사지기","data":[0, 3, 2, 2, 2, 11, 5, 6, 3, 3, 6, 3],"borderColor":"#E76F51","backgroundColor":"#E76F5122","tension":0.3,"fill":false,"pointRadius":4,"hidden":true},{"label":"필라테스바","data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],"borderColor":"#457B9D","backgroundColor":"#457B9D22","tension":0.3,"fill":false,"pointRadius":4,"hidden":true},{"label":"허리보호대","data":[0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0],"borderColor":"#A8DADC","backgroundColor":"#A8DADC22","tension":0.3,"fill":false,"pointRadius":4,"hidden":true}] },
+  options:{
+    responsive:true, maintainAspectRatio:false,
+    plugins:{ legend:{position:'top'} },
+    scales:{ x:{ticks:{maxRotation:60,font:{size:11}}}, y:{beginAtZero:true, ticks:{callback:v=>v.toLocaleString()+'건'}} }
+  }
+});
+</script>
+
+</div>
+</body>
+</html>
